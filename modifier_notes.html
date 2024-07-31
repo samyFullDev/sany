@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .edit-notes {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center; /* Center-align text */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 8px;
+            margin: 5px 0 20px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-notes">
+        <img src="https://th.bing.com/th/id/OIP.MjjthnpgS3I-ph12r6J5nQAAAA?rs=1&pid=ImgDetMain" alt="Logo" class="logo">
+        <h1>Modifier Notes</h1>
+        <form id="editNotesForm">
+            <label for="mathematics">Mathématiques</label>
+            <input type="number" id="mathematics" name="mathematics" step="0.01" min="0" max="20" required>
+
+            <label for="physics">Physique-Chimie</label>
+            <input type="number" id="physics" name="physics" step="0.01" min="0" max="20" required>
+
+            <label for="biology">Sciences de la Vie et de la Terre</label>
+            <input type="number" id="biology" name="biology" step="0.01" min="0" max="20" required>
+
+            <label for="english">Anglais</label>
+            <input type="number" id="english" name="english" step="0.01" min="0" max="20" required>
+
+            <label for="history">Histoire-Géographie</label>
+            <input type="number" id="history" name="history" step="0.01" min="0" max="20" required>
+
+            <button type="submit" class="btn">Enregistrer</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        document.getElementById('editNotesForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const notes = {
+                mathematics: document.getElementById('mathematics').value,
+                physics: document.getElementById('physics').value,
+                biology: document.getElementById('biology').value,
+                english: document.getElementById('english').value,
+                history: document.getElementById('history').value
+            };
+
+            // Redirection vers la nouvelle page de résultats avec la décision "ADMIS"
+            window.location.href = 'resultats_admis.html?' + urlParams.toString();
+        });
+    </script>
+</body>
+</html>

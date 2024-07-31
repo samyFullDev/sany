@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'inscription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input, select {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <img src="https://th.bing.com/th/id/OIP.MjjthnpgS3I-ph12r6J5nQAAAA?rs=1&pid=ImgDetMain" alt="Logo" class="logo">
+        <h1>Formulaire d'inscription</h1>
+        <input type="text" id="matricule" name="matricule" placeholder="Matricule" required><br><br>
+
+        <input type="text" id="nom" name="nom" placeholder="Nom et Prénom" required><br><br>
+
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <input type="text" id="lieu_naissance" name="lieu_naissance" placeholder="Lieu de Naissance" required><br><br>
+
+        <input type="text" id="examens" name="examens" placeholder="Examens" required><br><br>
+
+        <select id="decision" name="decision" required>
+            <option value="">Sélectionner une décision</option>
+            <option value="ADMIS(E)">ADMIS(E)</option>
+            <option value="ADMISSIBLE">ADMISSIBLE</option>
+            <option value="REFUSE(E)">REFUSE(E)</option>
+        </select><br><br>
+
+        <button type="button" onclick="submitForm()">Envoyer</button>
+    </form>
+
+    <script>
+        function formatDate(date) {
+            const [year, month, day] = date.split('-');
+            return `${day}-${month}-${year}`;
+        }
+
+        function submitForm() {
+            const form = document.getElementById('registrationForm');
+            const fields = form.querySelectorAll('input[required], select[required]');
+            let allFilled = true;
+
+            fields.forEach(field => {
+                if (!field.value) {
+                    allFilled = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+
+            if (allFilled) {
+                const formData = new FormData(form);
+                const dob = formData.get('dob');
+                formData.set('dob', formatDate(dob));
+
+                const queryString = new URLSearchParams(formData).toString();
+                window.location.href = 'resultat.html?' + queryString;
+            } else {
+                alert('Veuillez remplir tous les champs.');
+            }
+        }
+    </script>
+</body>
+</html>

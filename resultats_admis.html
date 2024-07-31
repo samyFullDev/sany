@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats Admis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .results {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .decision {
+            font-weight: bold;
+            color: green;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="results">
+        <img src="https://th.bing.com/th/id/OIP.MjjthnpgS3I-ph12r6J5nQAAAA?rs=1&pid=ImgDetMain" alt="Logo" class="logo">
+        <h1>Résultats</h1>
+        <p id="matricule"></p>
+        <p id="nom"></p>
+        <p id="dob"></p>
+        <p id="lieu_naissance"></p>
+        <p id="examens"></p>
+        <p id="decision" class="decision">ADMIS(E)</p>
+        <button class="btn" onclick="valider()">Valider</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const matricule = urlParams.get('matricule');
+        const nom = urlParams.get('nom');
+        const dob = urlParams.get('dob');
+        const lieu_naissance = urlParams.get('lieu_naissance');
+        const examens = urlParams.get('examens');
+        const decision = urlParams.get('decision');
+
+        document.getElementById('matricule').textContent = matricule;
+        document.getElementById('nom').textContent = nom;
+        document.getElementById('dob').textContent = dob;
+        document.getElementById('lieu_naissance').textContent = lieu_naissance;
+        document.getElementById('examens').textContent = examens;
+
+        const decisionElement = document.getElementById('decision');
+        decisionElement.textContent = decision;
+
+        if (decision === 'REFUSE(E)') {
+            decisionElement.classList.remove('admis');
+            decisionElement.classList.add('refuse');
+            decisionElement.style.color = 'red';
+        } else if (decision === 'ADMIS(E)' || decision === 'ADMISSIBLE') {
+            decisionElement.classList.add('admis');
+        }
+
+        function valider() {
+            alert('Résultats validés avec succès !');
+        }
+    </script>
+</body>
+</html>
